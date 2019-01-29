@@ -5,6 +5,15 @@ const DirectoryNamedPlugin = require('directory-named-webpack-plugin')
 
 const resolve = path.resolve.bind(this, __dirname, '..')
 
+const resourcesLoader = {
+	loader: 'sass-resources-loader',
+	options: {
+		resources: [
+			resolve('src/assets/sass/variables.sass')
+		]
+	}
+}
+
 module.exports = {
 	entry: resolve('src/index.js'),
 	output: {
@@ -44,7 +53,8 @@ module.exports = {
 							sourceMap: true
 						}
 					},
-					'sass-loader'
+					'sass-loader',
+					resourcesLoader
 				]
 			},
 			// Styles Modules
@@ -62,7 +72,8 @@ module.exports = {
 							localIdentName: '[local]__[hash:base64:5]'
 						}
 					},
-					'sass-loader'
+					'sass-loader',
+					resourcesLoader
 				]
 			},
 		]

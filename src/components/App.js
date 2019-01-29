@@ -1,13 +1,16 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
-import PropTypes from 'prop-types'
-
-import 'bulma/bulma.sass'
+import T from 'prop-types'
+import cls from 'classnames'
+import ControlsArea from './ControlsArea'
+import MapArea from './MapArea'
+import css from './App.sass'
 
 const App = () => {
 	return (
-		<div>
-			<h3>App</h3>
+		<div className={cls('container', 'is-fluid', css.app)}>
+			<ControlsArea />
+			<MapArea />
 		</div>
 	)
 }
