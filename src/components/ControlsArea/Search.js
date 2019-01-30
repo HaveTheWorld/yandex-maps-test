@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import T from 'prop-types'
 import cls from 'classnames'
 import { compose } from 'redux'
@@ -30,7 +30,7 @@ class Search extends React.Component {
 		}, 350)
 	}
 
-	onSelect = index => () => {
+	onSelect = index => {
 		const obj = this.state.geoObjects[index]
 		const { addPlacemark } = this.props
 
@@ -44,11 +44,16 @@ class Search extends React.Component {
 		this.setState({ query: '', geoObjects: [] })
 	}
 
+	onSubmit = e => {
+		e.preventDefault()
+		this.state.geoObjects.length && this.onSelect(0)
+	}
+
 	render() {
 		const { query, geoObjects } = this.state
 
 		return (
-			<Fragment>
+			<form onSubmit={this.onSubmit}>
 				<div className="field">
 					<div className="control">
 						<input
@@ -70,7 +75,7 @@ class Search extends React.Component {
 										key={index}
 										className={cls('dropdown-item', css.item)}
 										title={text}
-										onClick={this.onSelect(index)}
+										onClick={() => this.onSelect(index)}
 									>
 										{text}
 									</a>
@@ -79,7 +84,7 @@ class Search extends React.Component {
 						</div>
 					</div>
 				</div>
-			</Fragment>
+			</form>
 		)
 	}
 }

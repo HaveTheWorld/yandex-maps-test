@@ -15,6 +15,26 @@ const App = () => {
 	)
 }
 
+// import List from '@/components/Sort/List'
+
+// var items = [
+// 	"Gold",
+// 	"Crimson",
+// 	"Hotpink",
+// 	"Blueviolet",
+// 	"Cornflowerblue",
+// 	"Skyblue",
+// 	"Lightblue",
+// 	"Aquamarine",
+// 	"Burlywood"
+// ]
+
+// const App = () => {
+// 	return (
+// 		<List items={items} />
+// 	)
+// }
+
 App.propTypes = {
 	
 }
