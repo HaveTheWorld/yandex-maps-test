@@ -8,16 +8,21 @@
 		"dev": "nodemon --watch config --exec \"webpack-dev-server --config=config/dev.webpack.config.js --hot\""
 	},
 	"dependencies": {
+		"@babel/runtime": "^7.3.1",
 		"bulma": "^0.7.2",
 		"classnames": "^2.2.6",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
 		"react-hot-loader": "^4.6.3",
-		"react-yandex-maps": "^3.0.2"
+		"react-redux": "^6.0.0",
+		"react-yandex-maps": "^3.0.2",
+		"redux": "^4.0.1",
+		"redux-devtools-extension": "^2.13.7"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.2",
 		"@babel/plugin-proposal-class-properties": "^7.3.0",
+		"@babel/plugin-transform-runtime": "^7.2.0",
 		"@babel/preset-env": "^7.3.1",
 		"@babel/preset-react": "^7.0.0",
 		"babel-loader": "^8.0.5",

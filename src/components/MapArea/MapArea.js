@@ -1,20 +1,26 @@
 import React from 'react'
 import T from 'prop-types'
 import cls from 'classnames'
-import { Map } from 'react-yandex-maps'
+import { connect } from 'react-redux'
+import { Map, Placemark } from 'react-yandex-maps'
+import { controls } from '@/config'
+import RouteLine from './RouteLine'
 import css from './MapArea.sass'
 
-const mapState = {
-	center: [55.751574, 37.573856],
-	zoom: 9,
-	controls: ['zoomControl', 'fullscreenControl']
-}
+const MapArea = ({ center, placemarks }) => {
+	const mapState = { center, zoom: 13, controls }
 
-const MapArea = () => {
 	return (
 		<div className={css.area}>
-			<Map defaultState={mapState} className={cls('is-overlay', css.map)}>
-				
+			<Map state={mapState} className={cls('is-overlay', css.map)}>
+				{placemarks.map(({ id, coords, properties }) => (
+					<Placemark
+						key={id}
+						defaultGeometry={coords}
+						defaultProperties={properties}
+					/>
+				))}
+				<RouteLine placemarks={placemarks} />
 			</Map>
 		</div>
 	)
@@ -24,4 +30,9 @@ MapArea.propTypes = {
 	
 }
 
-export default MapArea
+const mapStateToProps = state => ({
+	center: state.geo.center,
+	placemarks: state.geo.placemarks
+})
+
+export default connect(mapStateToProps)(MapArea)
