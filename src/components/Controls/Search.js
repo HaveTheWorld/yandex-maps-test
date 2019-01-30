@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import T from 'prop-types'
 import cls from 'classnames'
 import { compose } from 'redux'
@@ -15,11 +15,6 @@ class Search extends React.Component {
 
 	timer
 
-	getId(obj) {
-		const [_, id] = Object.entries(obj).find(([key]) => /^id_\d+$/.test(key))
-		return id
-	}
-
 	onSearch = e => {
 		e.persist()
 		this.setState({ query: e.target.value })
@@ -30,12 +25,11 @@ class Search extends React.Component {
 		}, 350)
 	}
 
-	onSelect = index => () => {
+	onSelect = index => {
 		const obj = this.state.geoObjects[index]
 		const { addPlacemark } = this.props
 
 		const placemark = {
-			id: this.getId(obj),
 			coords: obj.geometry.getCoordinates(),
 			properties: obj.properties.getAll()
 		}
@@ -44,17 +38,23 @@ class Search extends React.Component {
 		this.setState({ query: '', geoObjects: [] })
 	}
 
+	onSubmit = e => {
+		e.preventDefault()
+		this.state.geoObjects.length && this.onSelect(0)
+	}
+
 	render() {
 		const { query, geoObjects } = this.state
 
 		return (
-			<Fragment>
+			<form onSubmit={this.onSubmit}>
 				<div className="field">
 					<div className="control">
 						<input
 						type="search"
 						className="input"
 						placeholder="Новая точка"
+						autoFocus
 						value={query}
 						onChange={this.onSearch}
 					/>
@@ -62,15 +62,15 @@ class Search extends React.Component {
 				</div>
 				<div className={cls('dropdown', css.dropdown, { 'is-active': geoObjects.length })}>
 					<div className={cls('dropdown-menu', css.menu)}>
-						<div className="dropdown-content">
+						<div className={cls('dropdown-content', css.content)}>
 							{geoObjects.map(({ properties }, index) => {
 								const text = properties.get('text')
 								return (
 									<a
 										key={index}
 										className={cls('dropdown-item', css.item)}
-										title={text}
-										onClick={this.onSelect(index)}
+										title={text}										
+										onClick={() => this.onSelect(index)}
 									>
 										{text}
 									</a>
@@ -79,7 +79,7 @@ class Search extends React.Component {
 						</div>
 					</div>
 				</div>
-			</Fragment>
+			</form>
 		)
 	}
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import T from 'prop-types'
 import Search from './Search'
 import MarksList from './MarksList'
-import css from './ControlsArea.sass'
+import css from './Controls.sass'
 
-const ControlsArea = () => {
+const Controls = () => {
 	return (
 		<div className={css.area}>
 			<div className={css.newPoint}>
@@ -17,8 +17,8 @@ const ControlsArea = () => {
 	)
 }
 
-ControlsArea.propTypes = {
+Controls.propTypes = {
 	
 }
 
-export default ControlsArea
+export default Controls

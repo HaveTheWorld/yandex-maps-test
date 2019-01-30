@@ -4,9 +4,9 @@ import { Polyline } from 'react-yandex-maps'
 
 const options = {
 	balloonCloseButton: false,
-	strokeColor: '#990066',
+	strokeColor: '#333',
 	strokeWidth: 5,
-	strokeOpacity: 0.7
+	strokeOpacity: 0.5
 }
 
 const RouteLine = ({ placemarks }) => {
