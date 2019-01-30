@@ -5,7 +5,7 @@ const DirectoryNamedPlugin = require('directory-named-webpack-plugin')
 
 const resolve = path.resolve.bind(this, __dirname, '..')
 
-const resourcesLoader = {
+const sassResourcesLoader = {
 	loader: 'sass-resources-loader',
 	options: {
 		resources: [
@@ -14,11 +14,14 @@ const resourcesLoader = {
 	}
 }
 
-module.exports = {
-	entry: resolve('src/index.js'),
+module.exports = ({ dev }) => ({
+	entry: {
+		main: resolve('src/index.js')
+	},
 	output: {
 		path: resolve('build'),
-		filename: 'js/bundle.js',
+		filename: dev ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
+		chunkFilename: dev ? 'js/[name].chunk.js' : 'js/[name].[contenthash:8].js',
 		publicPath: '/'
 	},
 	module: {
@@ -51,11 +54,11 @@ module.exports = {
 					{
 						loader: 'css-loader',
 						options: {
-							sourceMap: true
+							sourceMap: dev
 						}
 					},
 					'sass-loader',
-					resourcesLoader
+					sassResourcesLoader
 				]
 			},
 			// Styles Modules
@@ -67,14 +70,14 @@ module.exports = {
 					{
 						loader: 'css-loader',
 						options: {
-							sourceMap: true,
+							sourceMap: dev,
 							modules: true,
 							camelCase: true,
-							localIdentName: '[local]__[hash:base64:5]'
+							localIdentName: dev ? '[local]__[hash:base64:5]' : '[hash:base64]'
 						}
 					},
 					'sass-loader',
-					resourcesLoader
+					sassResourcesLoader
 				]
 			},
 		]
@@ -84,7 +87,8 @@ module.exports = {
 			template: resolve('src/index.html')
 		}),
 		new ExtractCssChunksPlugin({
-			filename: 'css/[name].css',
+			filename: dev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
+			chunkFilename: dev ? 'css/[name].chunk.css' : 'css/[name].[contenthash:8].css',
 			orderWarning: false
 		})
 	],
@@ -99,4 +103,4 @@ module.exports = {
 			'@': resolve('src')
 		}
 	}
-}
+})
