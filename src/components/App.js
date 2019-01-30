@@ -1,6 +1,5 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root'
-import T from 'prop-types'
 import cls from 'classnames'
 import Controls from './Controls'
 import MapArea from './MapArea'
@@ -13,10 +12,6 @@ const App = () => {
 			<MapArea />
 		</div>
 	)
-}
-
-App.propTypes = {
-	
 }
 
 export default hot(App)

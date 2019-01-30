@@ -85,7 +85,10 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-	
+	ymaps: T.shape({
+		geocode: T.func.isRequired
+	}),
+	addPlacemark: T.func.isRequired
 }
 
 const mapDispatchToProps = {

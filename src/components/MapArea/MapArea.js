@@ -36,7 +36,15 @@ const MapArea = ({ center, placemarks, movePlacemark }) => {
 }
 
 MapArea.propTypes = {
-	
+	center: T.arrayOf(T.number.isRequired).isRequired,
+	placemarks: T.arrayOf(
+		T.objectOf({
+			id: T.number.isRequired,
+			coords: T.arrayOf(T.number.isRequired),
+			properties: T.object.isRequired
+		})
+	).isRequired,
+	movePlacemark: T.func.isRequired
 }
 
 const mapStateToProps = state => ({
