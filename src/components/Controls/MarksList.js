@@ -25,7 +25,14 @@ const MarksList = ({ placemarks, removePlacemark, sortPlacemarks }) => {
 }
 
 MarksList.propTypes = {
-	
+	placemarks: T.arrayOf(
+		T.shape({
+			id: T.number.isRequired,
+			properties: T.object.isRequired
+		})
+	).isRequired,
+	removePlacemark: T.func.isRequired,
+	sortPlacemarks: T.func.isRequired
 }
 
 const mapStateToProps = state => ({

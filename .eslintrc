@@ -9,6 +9,7 @@
 		"eslint:recommended",
 		"plugin:react/recommended"
 	],
+	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaFeatures": {
 			"jsx": true
@@ -17,8 +18,14 @@
 		"sourceType": "module"
 	},
 	"plugins": [
-		"react"
+		"react",
+		"babel"
 	],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
 	"rules": {
 		"indent": "off",
 		"quotes": "off",

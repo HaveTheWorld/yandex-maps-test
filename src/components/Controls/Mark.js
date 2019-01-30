@@ -49,6 +49,7 @@ const targetSpec = {
 		if (dragIndex === hoverIndex) return null
 
 		// Determine rectangle on screen
+		// eslint-disable-next-line
 		const hoverBoundingRect = findDOMNode(
 			component
 		).getBoundingClientRect()
@@ -91,7 +92,11 @@ const targetCollect = connect => ({
 })
 
 Mark.propTypes = {
-	
+	id: T.number.isRequired,
+	text: T.string.isRequired,
+	isDragging: T.bool.isRequired,
+	connectDragSource: T.func.isRequired,
+	connectDropTarget: T.func.isRequired
 }
 
 export default

@@ -18,7 +18,11 @@ const RouteLine = ({ placemarks }) => {
 }
 
 RouteLine.propTypes = {
-	
+	placemarks: T.arrayOf(
+		T.shape({
+			coords: T.arrayOf(T.number.isRequired)
+		})
+	).isRequired
 }
 
 export default RouteLine

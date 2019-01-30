@@ -17,12 +17,17 @@ class Search extends React.Component {
 
 	onSearch = e => {
 		e.persist()
-		this.setState({ query: e.target.value })
 		clearTimeout(this.timer)
+		this.setState({ query: e.target.value })
+
+		if (!e.target.value) {
+			return this.setState({ geoObjects: [] })
+		}
+
 		this.timer = setTimeout(async () => {
 			const { geoObjects } = await this.props.ymaps.geocode(e.target.value , { results: 5 })
 			this.setState({ geoObjects: geoObjects.toArray() })
-		}, 350)
+		}, 750)
 	}
 
 	onSelect = index => {
@@ -85,7 +90,10 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-	
+	ymaps: T.shape({
+		geocode: T.func.isRequired
+	}),
+	addPlacemark: T.func.isRequired
 }
 
 const mapDispatchToProps = {
