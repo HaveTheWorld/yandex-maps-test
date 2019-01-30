@@ -1,13 +1,17 @@
-li.item
+li.mark
 	display: flex
 	align-items: flex-start
 	justify-content: center
+	cursor: move
+	&.is-dragging
+		opacity: 0
 
-.item-text
+.mark-text
 	flex-grow: 1
 	font-size: 14px
 
-.item-remove
+.mark-remove
+	margin-left: 5px
 	font-size: 25px
 	cursor: pointer
 	line-height: 1

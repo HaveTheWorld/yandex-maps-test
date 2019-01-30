@@ -1,5 +1,6 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 
 import geo from './ducks/geo'
 
@@ -8,7 +9,11 @@ export default () => {
 		geo
 	})
 
-	const enhancer = composeWithDevTools()
+	const enhancer = composeWithDevTools(
+		applyMiddleware(
+			thunk
+		)
+	)
 
 	const store = createStore(reducer, {}, enhancer)
 
